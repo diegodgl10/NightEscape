@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float speedMovement = 32f;
-    // Variable to count time
-    private float timeElapsed = 0f;
-    // Variable timeout before moving again
-    private float waitingTime = 0.13f;
+    // Movement speed
+    private float speedMovement = 2f; //16f
+    // Direction in 2D
     private Vector2 direction = Vector2.zero;
+    // Rigid body in 2D
     private Rigidbody2D rb2D;
+    // Horizontal movement value
     private float movHorizontal;
+    // Vertical movement value
     private float movVertical;
+    // Animation for the character
     private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +35,10 @@ public class Player : MonoBehaviour
         Movement();
     }
 
+    // Method of controlling movement
     private void Movement()
     {
-        if (WaitingTime())
-        {
+        
             if (Input.GetAxis("Horizontal") != 0)
             {
                 this.movHorizontal = (Input.GetAxis("Horizontal") < 0) ? -1 : 1;
@@ -44,9 +47,6 @@ public class Player : MonoBehaviour
             {
                 this.movVertical = (Input.GetAxis("Vertical") < 0) ? -1 : 1;
             }
-
-            //this.movHorizontal = Input.GetAxis("Horizontal");
-            //this.movVertical = Input.GetAxisRaw("Vertical");
 
             this.animator.SetFloat("MovHorizontal", this.movHorizontal);
             this.animator.SetFloat("MovVertical", this.movVertical);
@@ -60,21 +60,7 @@ public class Player : MonoBehaviour
             this.direction = new Vector2(this.movHorizontal, this.movVertical).normalized;
 
             this.rb2D.MovePosition(this.rb2D.position + this.direction * this.speedMovement * Time.fixedDeltaTime);
-            //this.rb2D.MovePosition(this.rb2D.position + this.direction * this.speedMovement/2 * Time.fixedDeltaTime);
 
             this.movHorizontal = this.movVertical = 0;
-        }
-    }
-
-    // Indicates if the waiting time between movements has elapsed.
-    private bool WaitingTime()
-    {
-        this.timeElapsed += Time.deltaTime;
-        if (this.timeElapsed >= this.waitingTime)
-        {
-            this.timeElapsed = 0f;
-            return true;
-        }
-        return false;
     }
 }
