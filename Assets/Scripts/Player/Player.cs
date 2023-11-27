@@ -21,6 +21,12 @@ public class Player : MonoBehaviour
     // Player's health bar UI
     private HealthBar healthBar;
 
+    private bool stunned = false;
+    private float elapsedStunCounter = 0f;
+    private float stunTime = 1.25f;
+
+    // cooldown
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +43,22 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
+        if (this.stunned == true)
+        {
+            StunWaitingTime();
+        }
+        else
+        {
+            Movement();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            DamageToPlayer();
+        }
     }
 
     /**
@@ -51,6 +72,9 @@ public class Player : MonoBehaviour
         }
         else
         {
+            this.stunned = true;
+            this.animator.SetBool("Stunned", this.stunned);
+            this.elapsedStunCounter = 0f;
             this.healthBar.UpdateHealth(this.health);
         }
     }
@@ -62,6 +86,18 @@ public class Player : MonoBehaviour
     {
         this.health = (this.health+2 > 5) ? 5 : this.health+2;
         this.healthBar.UpdateHealth(this.health);
+    }
+
+    // Indicates if the stun timeout has passed
+    private void StunWaitingTime()
+    {
+        this.elapsedStunCounter += Time.fixedDeltaTime;
+        if (this.elapsedStunCounter >= this.stunTime)
+        {
+            this.elapsedStunCounter = 0f;
+            this.stunned = false;
+            this.animator.SetBool("Stunned", this.stunned);
+        }
     }
 
     // Method of controlling movement

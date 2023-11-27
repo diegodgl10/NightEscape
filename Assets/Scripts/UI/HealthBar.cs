@@ -26,6 +26,5 @@ public class HealthBar : MonoBehaviour
     public void UpdateHealth(int healthPlayer)
     {
         this.animator.SetInteger("PlayerHealth", healthPlayer);
-        Debug.Log(healthPlayer);
     }
 }
