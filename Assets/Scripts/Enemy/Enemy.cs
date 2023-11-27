@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Movement speed
-    private float speedMovement = 2.25f; //16f
-    // Direction in 2D
-    private Vector2 direction = Vector2.zero;
     // Rigid body in 2D
     private Rigidbody2D rb2D;
+    // Animation for the character
+    private Animator animator;
+
+    // Movement speed
+    private float speedMovement = 2.25f; //16f
     // Horizontal movement value
     private float movHorizontal;
     // Vertical movement value
     private float movVertical;
-    // Animation for the character
-    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -57,9 +56,9 @@ public class Enemy : MonoBehaviour
             this.animator.SetFloat("LastVertical", this.movVertical);
         }
 
-        this.direction = new Vector2(this.movHorizontal, this.movVertical).normalized;
+        Vector2 direction = new Vector2(this.movHorizontal, this.movVertical).normalized;
 
-        this.rb2D.MovePosition(this.rb2D.position + this.direction * this.speedMovement * Time.fixedDeltaTime);
+        this.rb2D.MovePosition(this.rb2D.position + direction * this.speedMovement * Time.fixedDeltaTime);
 
         this.movHorizontal = this.movVertical = 0;
     }

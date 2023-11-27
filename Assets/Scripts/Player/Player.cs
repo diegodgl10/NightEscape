@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Movement speed
-    private float speedMovement = 2f; //16f
-    // Direction in 2D
-    private Vector2 direction = Vector2.zero;
     // Rigid body in 2D
     private Rigidbody2D rb2D;
+    // Animation for the character
+    private Animator animator;
+
+    // Movement speed
+    private float speedMovement = 2f; //16f
     // Horizontal movement value
     private float movHorizontal;
     // Vertical movement value
     private float movVertical;
-    // Animation for the character
-    private Animator animator;
+
+    // Player health
+    public int health = 5;
+    // Player's health bar UI
+    private HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rb2D = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
+        this.healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
     }
 
     // Update is called once per frame
@@ -33,6 +38,30 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+    }
+
+    /**
+     * Method for inflicting damage to the player
+     */
+    public void DamageToPlayer()
+    {
+        this.health--;
+        if (this.health < 0) {
+            Debug.Log("Game Over");
+        }
+        else
+        {
+            this.healthBar.UpdateHealth(this.health);
+        }
+    }
+
+    /**
+     * Method for healing the player
+     */
+    public void HealToPlayer()
+    {
+        this.health = (this.health+2 > 5) ? 5 : this.health+2;
+        this.healthBar.UpdateHealth(this.health);
     }
 
     // Method of controlling movement
@@ -57,9 +86,9 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat("LastVertical", this.movVertical);
             }
 
-            this.direction = new Vector2(this.movHorizontal, this.movVertical).normalized;
+            Vector2 direction = new Vector2(this.movHorizontal, this.movVertical).normalized;
 
-            this.rb2D.MovePosition(this.rb2D.position + this.direction * this.speedMovement * Time.fixedDeltaTime);
+            this.rb2D.MovePosition(this.rb2D.position + direction * this.speedMovement * Time.fixedDeltaTime);
 
             this.movHorizontal = this.movVertical = 0;
     }
