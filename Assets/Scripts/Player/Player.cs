@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     private float movVertical;
 
     // Player health
-    public int health = 5;
+    private int health = 5;
     // Player's health bar UI
     private HealthBar healthBar;
 
