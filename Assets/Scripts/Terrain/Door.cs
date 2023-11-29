@@ -13,9 +13,9 @@ public class Door : MonoBehaviour
         this.player = GameObject.FindWithTag("Player");   
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.L))
         {
             this.player.transform.position = destinationDoor.transform.position;
         }
