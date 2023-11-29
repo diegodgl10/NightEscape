@@ -21,9 +21,15 @@ public class Player : MonoBehaviour
     // Player's health bar UI
     private HealthBar healthBar;
 
+    // Indicator of whether we are stunned
     private bool stunned = false;
+    // Time we have been stunned
     private float elapsedStunCounter = 0f;
+    // Time we must be alert when receiving damage
     private float stunTime = 1.25f;
+
+    // Our backpack
+    private Backpack backpack;
 
     // cooldown
 
@@ -33,6 +39,7 @@ public class Player : MonoBehaviour
         this.rb2D = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
         this.healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        this.backpack = GameObject.Find("Backpack").GetComponent<Backpack>();
     }
 
     // Update is called once per frame
@@ -50,14 +57,6 @@ public class Player : MonoBehaviour
         else
         {
             Movement();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            DamageToPlayer();
         }
     }
 
@@ -86,6 +85,27 @@ public class Player : MonoBehaviour
     {
         this.health = (this.health+2 > 5) ? 5 : this.health+2;
         this.healthBar.UpdateHealth(this.health);
+    }
+
+    /**
+     * Indicates the quantity of objects of the same type in the backpack
+     */
+    public bool HasItem(string item)
+    {
+        if (this.backpack.ItemQuantity(item) < 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    // Controls the damage dealt by an enemy
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            DamageToPlayer();
+        }
     }
 
     // Indicates if the stun timeout has passed

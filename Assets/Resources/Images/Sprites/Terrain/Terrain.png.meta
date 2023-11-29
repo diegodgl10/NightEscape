@@ -662,6 +662,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Terrain_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b805868c3c761dd4492b38ca5912fe6f
+      internalID: 417180477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -677,6 +698,7 @@ TextureImporter:
       Terrain_13: 1354664119
       Terrain_18: 1962334727
       Terrain_0: -2044325113
+      Terrain_26: 417180477
       Terrain_10: 597370189
       Terrain_8: -1492518653
       Terrain_14: -693021113
