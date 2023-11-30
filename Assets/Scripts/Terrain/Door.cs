@@ -15,7 +15,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.L))
+        if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.K))
         {
             if (this.requirement == "isClosed")
             {

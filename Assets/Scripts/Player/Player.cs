@@ -92,11 +92,19 @@ public class Player : MonoBehaviour
      */
     public bool HasItem(string item)
     {
-        if (this.backpack.ItemQuantity(item) < 0)
+        if (this.backpack.ItemQuantity(item) <= 0)
         {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Collect an item
+     */
+    public void CollectItem(string item)
+    {
+        this.backpack.AddItem(item);
     }
 
     // Controls the damage dealt by an enemy
