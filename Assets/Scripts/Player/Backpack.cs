@@ -134,6 +134,19 @@ public class Backpack : MonoBehaviour
         return -1;
     }
 
+    public List<Item> GetItems()
+    {
+        List<Item> items = new List<Item>();
+        foreach (Item item in this.backpack)
+        {
+            if (item.GetQuantity() < 0)
+            {
+                items.Add(item);
+            }
+        }
+        return items;
+    }
+
     // Start the backpack
     private void StartBackpack()
     {

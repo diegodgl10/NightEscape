@@ -683,6 +683,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Terrain_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b68f7530226074990bf49c7c16044f
+      internalID: -286018060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Terrain_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaacc3976c2184546a9b2507e4c4b44b
+      internalID: 1781135172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -697,6 +739,7 @@ TextureImporter:
       Terrain_15: 1959513542
       Terrain_13: 1354664119
       Terrain_18: 1962334727
+      Terrain_28: 1781135172
       Terrain_0: -2044325113
       Terrain_26: 417180477
       Terrain_10: 597370189
@@ -704,6 +747,7 @@ TextureImporter:
       Terrain_14: -693021113
       Terrain_12: -1477486109
       Terrain_7: 878753237
+      Terrain_27: -286018060
       Terrain_9: -1078475390
       Terrain_16: -796624771
       Terrain_24: -1594819182
