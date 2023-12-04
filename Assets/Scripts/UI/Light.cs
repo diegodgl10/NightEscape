@@ -6,6 +6,7 @@ public class Light : MonoBehaviour
 {
     public GameObject highLight;
     public GameObject lowLight;
+    internal Color color;
     private Player player;
 
 

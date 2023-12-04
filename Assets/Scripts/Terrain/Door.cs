@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    // The door of destiny
     public GameObject destinationDoor;
+    // The player object
     private Player player;
+    // The requirement to open the door
     public string requirement = "isClosed";
     // Start is called before the first frame update
     void Start()
