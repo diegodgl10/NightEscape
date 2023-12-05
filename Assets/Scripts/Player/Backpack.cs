@@ -152,17 +152,43 @@ public class Backpack : MonoBehaviour
     {
         this.backpack = new List<Item>();
         Item item;
+        item = new Item("First aid", "First aid kit.");
+        this.backpack.Add(item);
         item = new Item("Flashlight", "It will help you see in the dark.");
         this.backpack.Add(item);
         item = new Item("Fuse", "Big fuse, can withstand a lot of energy.");
-        this.backpack.Add(item);
-        item = new Item("First aid kit", "First aid kit.");
         this.backpack.Add(item);
         item = new Item("Sword", "Sword of Luis Ignacio Negrete Kalvillo.");
         this.backpack.Add(item);
         item = new Item("Key A", "Key with the inscription \"A\".");
         this.backpack.Add(item);
+        item = new Item("Elevator I", "Key for the elevator on floor I.");
+        this.backpack.Add(item);
+        item = new Item("Elevator II", "Key for the elevator on floor II.");
+        this.backpack.Add(item);
         item = new Item("Elevator III", "Key for the elevator on floor III.");
+        this.backpack.Add(item);
+        item = new Item("USB", "A simple usb.");
+        this.backpack.Add(item);
+
+        AddNotes();
+    }
+
+    private void AddNotes()
+    {
+        string note1 = "From: Lucas, \n Something bad has happened, get out of here!";
+        string note2 = "From: Emma, \n The security mechanisms are broken, we have to turn everything back on.";
+        string note3 = "From: Emma, \n Why did this happen? We just wanted to stop the bedbugs and help the world.";
+        string note4 = "From: Rebecca, \n before all this happened, I saw Professor Roberto very nervous in the hallways.";
+
+        Item item;
+        item = new Item("Note 1", note1);
+        this.backpack.Add(item);
+        item = new Item("Note 2", note2);
+        this.backpack.Add(item);
+        item = new Item("Note 3", note3);
+        this.backpack.Add(item);
+        item = new Item("Note 4", note4);
         this.backpack.Add(item);
     }
 }
