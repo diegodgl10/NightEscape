@@ -107,6 +107,14 @@ public class Player : MonoBehaviour
         this.backpack.AddItem(item);
     }
 
+    /**
+     * Remove an item
+     */
+    public void RemoveItem(string item)
+    {
+        this.backpack.SubtractItem(item);
+    }
+
     // Controls the damage dealt by an enemy
     private void OnCollisionEnter2D(Collision2D collision)
     {

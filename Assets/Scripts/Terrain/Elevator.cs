@@ -9,6 +9,8 @@ public class Elevator : MonoBehaviour
     private Player player;
     // The requirement to open the door
     public string requirement = "isClosed";
+    // The generator power
+    public Generator generator;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,16 @@ public class Elevator : MonoBehaviour
     {
         if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.K))
         {
+            if (this.generator == null)
+            {
+                return;
+            }
+            if (this.generator.GetStatusGenerator() == false)
+            {
+                Debug.Log("The elevator has no power to operate");
+                return;
+
+            }
             if (this.requirement == "isClosed")
             {
                 Debug.Log("The elevator is not in operation");

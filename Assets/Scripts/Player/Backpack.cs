@@ -134,6 +134,9 @@ public class Backpack : MonoBehaviour
         return -1;
     }
 
+    /**
+     * Return the list of items
+     */
     public List<Item> GetItems()
     {
         List<Item> items = new List<Item>();
@@ -170,10 +173,13 @@ public class Backpack : MonoBehaviour
         this.backpack.Add(item);
         item = new Item("USB", "A simple usb.");
         this.backpack.Add(item);
+        item = new Item("USB with password", "A USB with a password.");
+        this.backpack.Add(item);
 
         AddNotes();
     }
 
+    // Auxiliary to add notes to the backpack
     private void AddNotes()
     {
         string note1 = "From: Lucas, \n Something bad has happened, get out of here!";
