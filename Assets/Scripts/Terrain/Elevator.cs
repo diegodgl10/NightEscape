@@ -11,6 +11,9 @@ public class Elevator : MonoBehaviour
     public string requirement = "isClosed";
     // The generator power
     public Generator generator;
+    // Player notification
+    public Notification notifications;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,13 +30,15 @@ public class Elevator : MonoBehaviour
             }
             if (this.generator.GetStatusGenerator() == false)
             {
-                Debug.Log("The elevator has no power to operate");
+                this.notifications.Notify("The elevator has no power to operate");
+                //Debug.Log("The elevator has no power to operate");
                 return;
 
             }
             if (this.requirement == "isClosed")
             {
-                Debug.Log("The elevator is not in operation");
+                this.notifications.Notify("The elevator is not in operation");
+                // Debug.Log("The elevator is not in operation");
             }
             else
             {
@@ -43,7 +48,8 @@ public class Elevator : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Elevator locked, you need a key");
+                    this.notifications.Notify("Elevator locked, you need a key");
+                    // Debug.Log("Elevator locked, you need a key");
                 }
             }
         }

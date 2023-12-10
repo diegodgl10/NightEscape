@@ -9,6 +9,8 @@ public class Item : MonoBehaviour
     public GameObject item;
     // The name of the item on the ground to be recorded in the backpack.
     public string nameItem;
+    // Player notification
+    public Notification notifications;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +23,9 @@ public class Item : MonoBehaviour
         if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.K))
         {
             this.player.CollectItem(this.nameItem);
-            Debug.Log("You have collected a \"" + this.nameItem + "\"");
             Destroy(this.item);
+            // Debug.Log("You have collected a \"" + this.nameItem + "\"");
+            this.notifications.Notify("You have collected a \"" + this.nameItem + "\"");
         }
     }
 }
