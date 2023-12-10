@@ -165,6 +165,10 @@ public class Backpack : MonoBehaviour
         this.backpack.Add(item);
         item = new Item("Key A", "Key with the inscription \"A\".");
         this.backpack.Add(item);
+        item = new Item("Key B", "Key with the inscription \"B\".");
+        this.backpack.Add(item);
+        item = new Item("Key C", "Key with the inscription \"C\".");
+        this.backpack.Add(item);
         item = new Item("Elevator I", "Key for the elevator on floor I.");
         this.backpack.Add(item);
         item = new Item("Elevator II", "Key for the elevator on floor II.");

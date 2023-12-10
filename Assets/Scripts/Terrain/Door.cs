@@ -10,6 +10,8 @@ public class Door : MonoBehaviour
     private Player player;
     // The requirement to open the door
     public string requirement = "isClosed";
+    // Player notification
+    public Notification notifications;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,8 @@ public class Door : MonoBehaviour
         {
             if (this.requirement == "isClosed")
             {
-                Debug.Log("Door Locked, cannot be opened");
+                // Debug.Log("Door Locked, cannot be opened");
+                this.notifications.Notify("Door Locked, cannot be opened");
             }
             else
             {
@@ -32,7 +35,8 @@ public class Door : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Locked door, you need a key");
+                    // Debug.Log("Locked door, you need a key");
+                    this.notifications.Notify("Locked door, you need a key");
                 }
             }
         }

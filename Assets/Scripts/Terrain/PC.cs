@@ -10,6 +10,8 @@ public class PC : MonoBehaviour
     private Player player;
     // The requirement to open the door
     private string requirement = "USB";
+    // Player notification
+    public Notification notifications;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,8 @@ public class PC : MonoBehaviour
             }
             else
             {
-                Debug.Log("I need a usb to use this computer");
+                // Debug.Log("I need a usb to use this computer");
+                this.notifications.Notify("I need a usb to use this computer");
             }
         }
     }

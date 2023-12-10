@@ -10,6 +10,8 @@ public class Generator : MonoBehaviour
     private bool statusEnabled = false;
     // The player object
     private Player player;
+    // Player notification
+    public Notification notifications;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,8 @@ public class Generator : MonoBehaviour
             {
                 this.statusEnabled = true;
                 this.animator.SetBool("StatusEnabled", this.statusEnabled);
-                Debug.Log("Generator on");
+                // Debug.Log("Generator on");
+                this.notifications.Notify("Generator on");
             }
         }
     }

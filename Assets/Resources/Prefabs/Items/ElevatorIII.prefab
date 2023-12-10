@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 388529719607487149}
   nameItem: Elevator III
+  notifications: {fileID: 0}
 --- !u!1 &388529719992435507
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1285624623, guid: c17a541d32038c5468b45202f09a82e9, type: 3}
+  m_Sprite: {fileID: 1455905751, guid: c17a541d32038c5468b45202f09a82e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

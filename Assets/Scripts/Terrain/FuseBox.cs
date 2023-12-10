@@ -12,6 +12,8 @@ public class FuseBox : MonoBehaviour
     private Player player;
     // The requirement to open the door
     private string requirement = "Fuse";
+    // Player notification
+    public Notification notifications;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +29,13 @@ public class FuseBox : MonoBehaviour
             {
                 this.statusEnabled = true;
                 this.animator.SetBool("StatusEnabled", this.statusEnabled);
-                Debug.Log("Generator on");
+                // Debug.Log("Fuse box on");
+                this.notifications.Notify("Fuse box on");
             }
             else
             {
-                Debug.Log("I need a fuse to use this fuse box");
+                // Debug.Log("I need a fuse to use this fuse box");
+                this.notifications.Notify("I need a fuse to use this fuse box");
             }
         }
     }
