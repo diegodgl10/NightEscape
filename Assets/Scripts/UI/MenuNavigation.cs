@@ -7,20 +7,16 @@ public class MenuNavigation : MonoBehaviour
 {
     // Home screen
     public GameObject homeScreen;
-    // Options screen
-    public GameObject optionsScreen;
     // Controls screen
     public GameObject controlsScreen;
     // 1 for home screen
-    // 2 for options screen
-    // 3 for controls screen
+    // 2 for controls screen
     private int screenStatus;
 
     // Start is called before the first frame update
     void Start()
     {
         this.homeScreen.SetActive(true);
-        this.optionsScreen.SetActive(false);
         this.controlsScreen.SetActive(false);
         this.screenStatus = 1;
     }
@@ -34,9 +30,6 @@ public class MenuNavigation : MonoBehaviour
                 HomeScreenNavigation();
                 break;
             case 2:
-                OptionsScreenNavigation();
-                break;
-            case 3:
                 ControlsScreenNavigation();
                 break;
             default:
@@ -54,18 +47,8 @@ public class MenuNavigation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             this.homeScreen.SetActive(false);
-            this.optionsScreen.SetActive(true);
+            this.controlsScreen.SetActive(true);
             this.screenStatus = 2;
-        }
-    }
-
-    private void OptionsScreenNavigation()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            this.homeScreen.SetActive(true);
-            this.optionsScreen.SetActive(false);
-            this.screenStatus = 1;
         }
     }
 
@@ -73,9 +56,13 @@ public class MenuNavigation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            this.optionsScreen.SetActive(true);
+            this.homeScreen.SetActive(true);
             this.controlsScreen.SetActive(false);
-            this.screenStatus = 2;
+            this.screenStatus = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 }

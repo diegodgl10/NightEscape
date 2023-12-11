@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyAlert : MonoBehaviour
 {
-    public AudioClip audioClipAlert;
-    public AudioSource audioSourceAlert;
+    public AudioClip audioClipEnemy;
+    public AudioSource audioSourceEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.audioSourceAlert = this.GetComponent<AudioSource>();
+        this.audioSourceEnemy = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class EnemyAlert : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            this.audioSourceAlert.PlayOneShot(this.audioClipAlert);
+            this.audioSourceEnemy.PlayOneShot(this.audioClipEnemy);
         }
     }
 }

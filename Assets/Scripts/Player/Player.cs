@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     // Our backpack
     private Backpack backpack;
 
+    private GameOver gameOver;
+
     // cooldown
 
     // Start is called before the first frame update
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
         this.animator = GetComponent<Animator>();
         this.healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         this.backpack = GameObject.Find("Backpack").GetComponent<Backpack>();
+        this.gameOver = GameObject.Find("GameOver").GetComponent<GameOver>();
     }
 
     // Update is called once per frame
@@ -71,7 +74,8 @@ public class Player : MonoBehaviour
         }
         this.health--;
         if (this.health < 0) {
-            Debug.Log("Game Over");
+            // Debug.Log("Game Over");
+            this.gameOver.EndOfGame();
         }
         else
         {

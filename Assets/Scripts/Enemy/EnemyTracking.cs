@@ -16,6 +16,13 @@ public class EnemyTracking : MonoBehaviour
     private float minDistance = 1.1f;
     private float rangeDistance = 7.0f;
 
+    // Indicator of whether the enemy is stunned
+    private bool cooldown = false;
+    // Time we have been cooldown
+    private float elapsedCooldownCounter = 0f;
+    // Time we must be alert when receiving damage
+    private float cooldownTime = 2.25f;
+
     private Player player;
 
     // Start is called before the first frame update
@@ -52,7 +59,14 @@ public class EnemyTracking : MonoBehaviour
         }
         else
         {
-            Attack();
+            if (this.cooldown == true)
+            {
+                CooldownWaitingTime();
+            }
+            else
+            {
+                Attack();
+            }
         }
     }
 
@@ -65,7 +79,22 @@ public class EnemyTracking : MonoBehaviour
     private void Attack()
     {
         // Debug.Log("The enemy has attacked you");
-        this.player.DamageToPlayer();
+        if (this.cooldown == false)
+        {
+            this.player.DamageToPlayer();
+            this.cooldown = true;
+        }
+    }
+
+    // Indicates if the stun timeout has passed
+    private void CooldownWaitingTime()
+    {
+        this.elapsedCooldownCounter += Time.fixedDeltaTime;
+        if (this.elapsedCooldownCounter >= this.cooldownTime)
+        {
+            this.elapsedCooldownCounter = 0f;
+            this.cooldown = false;
+        }
     }
 
     private void Flip()

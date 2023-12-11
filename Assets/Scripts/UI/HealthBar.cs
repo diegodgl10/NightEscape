@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
+    public AudioClip audioClipAlert;
+    public AudioSource audioSourceAlert;
+
     // Animation for the health bar
     private Animator animator;
 
@@ -12,6 +15,7 @@ public class HealthBar : MonoBehaviour
     {
         this.animator = GetComponent<Animator>();
         this.animator.SetInteger("PlayerHealth", 5);
+        this.audioSourceAlert = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,6 +29,10 @@ public class HealthBar : MonoBehaviour
      */
     public void UpdateHealth(int healthPlayer)
     {
+        if (healthPlayer == 1)
+        {
+            this.audioSourceAlert.PlayOneShot(this.audioClipAlert);
+        }
         this.animator.SetInteger("PlayerHealth", healthPlayer);
     }
 }
