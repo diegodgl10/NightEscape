@@ -65,6 +65,10 @@ public class Player : MonoBehaviour
      */
     public void DamageToPlayer()
     {
+        if (this.stunned)
+        {
+            return;
+        }
         this.health--;
         if (this.health < 0) {
             Debug.Log("Game Over");
@@ -118,10 +122,12 @@ public class Player : MonoBehaviour
     // Controls the damage dealt by an enemy
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.tag == "Enemy")
         {
             DamageToPlayer();
         }
+        */
     }
 
     // Indicates if the stun timeout has passed
