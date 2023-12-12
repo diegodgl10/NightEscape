@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
 
     private GameOver gameOver;
 
+    public AudioClip audioClipDamage;
+    public AudioSource audioSourceDamage;
+
     // cooldown
 
     // Start is called before the first frame update
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
         this.healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         this.backpack = GameObject.Find("Backpack").GetComponent<Backpack>();
         this.gameOver = GameObject.Find("GameOver").GetComponent<GameOver>();
+        this.audioSourceDamage = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -83,6 +87,7 @@ public class Player : MonoBehaviour
             this.animator.SetBool("Stunned", this.stunned);
             this.elapsedStunCounter = 0f;
             this.healthBar.UpdateHealth(this.health);
+            this.audioSourceDamage.PlayOneShot(this.audioClipDamage);
         }
     }
 

@@ -12,10 +12,15 @@ public class Door : MonoBehaviour
     public string requirement = "isClosed";
     // Player notification
     public Notification notifications;
+
+    public AudioClip audioClipDoor;
+    public AudioSource audioSourceDoor;
+
     // Start is called before the first frame update
     void Start()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.audioSourceDoor = this.GetComponent<AudioSource>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -31,6 +36,7 @@ public class Door : MonoBehaviour
             {
                 if (this.requirement == "null" || this.player.HasItem(this.requirement))
                 {
+                    this.audioSourceDoor.PlayOneShot(this.audioClipDoor);
                     this.player.transform.position = destinationDoor.transform.position;
                 }
                 else
