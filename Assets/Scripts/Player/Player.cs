@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
             return;
         }
         this.health--;
-        if (this.health < 0) {
+        if (this.health <= 0) {
             // Debug.Log("Game Over");
             this.gameOver.EndOfGame();
         }

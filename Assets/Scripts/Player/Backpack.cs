@@ -135,6 +135,21 @@ public class Backpack : MonoBehaviour
     }
 
     /**
+     * Returns the description of items
+     */
+    public string ItemDescription(string itemName)
+    {
+        foreach (Item item in this.backpack)
+        {
+            if (item.GetName() == itemName)
+            {
+                return item.GetDescription();
+            }
+        }
+        return "";
+    }
+
+    /**
      * Return the list of items
      */
     public List<Item> GetItems()
@@ -186,10 +201,10 @@ public class Backpack : MonoBehaviour
     // Auxiliary to add notes to the backpack
     private void AddNotes()
     {
-        string note1 = "From: Lucas, \n Something bad has happened, get out of here!";
-        string note2 = "From: Emma, \n The security mechanisms are broken, we have to turn everything back on.";
-        string note3 = "From: Emma, \n Why did this happen? We just wanted to stop the bedbugs and help the world.";
-        string note4 = "From: Rebecca, \n before all this happened, I saw Professor Roberto very nervous in the hallways.";
+        string note1 = "From: Lucas, Something bad has happened, get out of here!";
+        string note2 = "From: Emma, The security mechanisms are broken, we have to turn everything back on.";
+        string note3 = "From: Emma, Why did this happen? We just wanted to stop the bedbugs and help the world.";
+        string note4 = "From: Rebecca, before all this happened, I saw Professor Roberto very nervous in the hallways.";
 
         Item item;
         item = new Item("Note 1", note1);
