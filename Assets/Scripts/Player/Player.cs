@@ -28,15 +28,28 @@ public class Player : MonoBehaviour
     // Time we must be alert when receiving damage
     private float stunTime = 1.25f;
 
+    private float minDistance = 2.0f;
+
     // Our backpack
     private Backpack backpack;
+
+    private bool withSword = false;
+    GameObject[] enemies;
 
     private GameOver gameOver;
 
     public AudioClip audioClipDamage;
     public AudioSource audioSourceDamage;
 
-    // cooldown
+    // Indicator of whether the enemy is stunned
+    private bool cooldown = false;
+    // Time we have been cooldown
+    private float elapsedCooldownCounter = 0f;
+    // Time we must be alert when receiving damage
+    private float cooldownTime = 2.25f;
+
+    private float attackAnimationCounter = 0f;
+    private float attackAnimationTime = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +60,7 @@ public class Player : MonoBehaviour
         this.backpack = GameObject.Find("Backpack").GetComponent<Backpack>();
         this.gameOver = GameObject.Find("GameOver").GetComponent<GameOver>();
         this.audioSourceDamage = this.GetComponent<AudioSource>();
+        this. enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     // Update is called once per frame
@@ -57,12 +71,25 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        AttackAnimation();
         if (this.stunned == true)
         {
             StunWaitingTime();
         }
         else
         {
+            if (this.cooldown == true)
+            {
+                CooldownWaitingTime();
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.K) && this.withSword == true)
+                {
+                    Attack();
+                    return;
+                }
+            }
             Movement();
         }
     }
@@ -117,6 +144,14 @@ public class Player : MonoBehaviour
      */
     public void CollectItem(string item)
     {
+        if (item == "Sword")
+        {
+            this.withSword = true;
+        }
+        if (item == "First aid")
+        {
+            HealToPlayer();
+        }
         this.backpack.AddItem(item);
     }
 
@@ -128,17 +163,6 @@ public class Player : MonoBehaviour
         this.backpack.SubtractItem(item);
     }
 
-    // Controls the damage dealt by an enemy
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*
-        if (collision.gameObject.tag == "Enemy")
-        {
-            DamageToPlayer();
-        }
-        */
-    }
-
     // Indicates if the stun timeout has passed
     private void StunWaitingTime()
     {
@@ -148,6 +172,17 @@ public class Player : MonoBehaviour
             this.elapsedStunCounter = 0f;
             this.stunned = false;
             this.animator.SetBool("Stunned", this.stunned);
+        }
+    }
+
+    // Indicates if the stun timeout has passed
+    private void CooldownWaitingTime()
+    {
+        this.elapsedCooldownCounter += Time.fixedDeltaTime;
+        if (this.elapsedCooldownCounter >= this.cooldownTime)
+        {
+            this.elapsedCooldownCounter = 0f;
+            this.cooldown = false;
         }
     }
 
@@ -178,5 +213,50 @@ public class Player : MonoBehaviour
             this.rb2D.MovePosition(this.rb2D.position + direction * this.speedMovement * Time.fixedDeltaTime);
 
             this.movHorizontal = this.movVertical = 0;
+    }
+
+    private void Attack()
+    {
+        if (this.cooldown == true)
+        {
+            return;
+        }
+        this.animator.SetBool("Attacking", true);
+        foreach (GameObject enemy in this.enemies)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+
+            // Si el enemigo está lo suficientemente cerca, inflige daño
+            if (distance <= minDistance)
+            {
+                InflictDamage(enemy);
+            }
+        }
+    }
+
+    private void AttackAnimation()
+    {
+        this.attackAnimationCounter += Time.fixedDeltaTime;
+        if (this.attackAnimationCounter >= this.attackAnimationTime)
+        {
+            this.attackAnimationCounter = 0f;
+            this.animator.SetBool("Attacking", false);
+        }
+    }
+
+    private void InflictDamage(GameObject enemy)
+    {
+        EnemyTracking enemyTrackingScript = enemy.GetComponent<EnemyTracking>();
+        if (enemyTrackingScript != null)
+        {
+            enemyTrackingScript.DamageToEnemy();
+            return;
+        }
+
+        EnemyPatrol enemyPatrolScript = enemy.GetComponent<EnemyPatrol>();
+        if (enemyPatrolScript != null)
+        {
+            enemyPatrolScript.DamageToEnemy();
+        }
     }
 }

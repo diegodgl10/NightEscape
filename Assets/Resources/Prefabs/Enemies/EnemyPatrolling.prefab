@@ -249,7 +249,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a5c5e5f16051214498895af36ed0855c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 953cc07aa2ab3a349a8aaff233d89600, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.4
   m_Pitch: 1
@@ -351,6 +351,8 @@ MonoBehaviour:
   checkpoint2: {fileID: 1492477550900276208}
   checkpoint3: {fileID: 1492477551115204268}
   checkpoint4: {fileID: 1492477551657088713}
+  audioClipDamage: {fileID: 8300000, guid: 953cc07aa2ab3a349a8aaff233d89600, type: 3}
+  audioSourceDamage: {fileID: 7769655048876357470}
 --- !u!1 &7111833267372176741
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +399,7 @@ GameObject:
   - component: {fileID: 3918709542333667199}
   m_Layer: 0
   m_Name: EnemyPatrolling
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6320531661796468394}
   m_Layer: 0
   m_Name: EnemyTracking
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,6 +374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: {fileID: 245245189042570416}
+  audioClipDamage: {fileID: 8300000, guid: 953cc07aa2ab3a349a8aaff233d89600, type: 3}
+  audioSourceDamage: {fileID: 722365429844002443}
 --- !u!82 &722365429844002443
 AudioSource:
   m_ObjectHideFlags: 0
@@ -384,7 +386,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a5c5e5f16051214498895af36ed0855c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 953cc07aa2ab3a349a8aaff233d89600, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.4
   m_Pitch: 1

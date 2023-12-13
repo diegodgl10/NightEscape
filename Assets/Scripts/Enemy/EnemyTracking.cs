@@ -13,7 +13,7 @@ public class EnemyTracking : MonoBehaviour
 
     // Movement speed
     private float speedMovement = 2.25f; //16f
-    private float minDistance = 1.1f;
+    private float minDistance = 0.8f;
     private float rangeDistance = 7.0f;
 
     // Indicator of whether the enemy is stunned
@@ -22,8 +22,20 @@ public class EnemyTracking : MonoBehaviour
     private float elapsedCooldownCounter = 0f;
     // Time we must be alert when receiving damage
     private float cooldownTime = 2.25f;
+    private float attackAnimationCounter = 0f;
+    private float attackAnimationTime = 0.3f;
 
     private Player player;
+
+    // Indicator of whether we are stunned
+    private bool stunned = false;
+    // Time we have been stunned
+    private float elapsedStunCounter = 0f;
+    // Time we must be alert when receiving damage
+    private float stunTime = 1.25f;
+
+    public AudioClip audioClipDamage;
+    public AudioSource audioSourceDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +45,7 @@ public class EnemyTracking : MonoBehaviour
         this.animator = GetComponent<Animator>();
         this.animator.SetFloat("LastHorizontal", 0);
         this.animator.SetFloat("LastVertical", -1);
+        this.audioSourceDamage = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +55,7 @@ public class EnemyTracking : MonoBehaviour
 
     private void FixedUpdate()
     {
+        AttackAnimation();
         if (Vector2.Distance(this.transform.position, this.player.transform.position) > this.rangeDistance)
         {
             if (Vector2.Distance(this.transform.position, this.spawn.transform.position) != 0)
@@ -52,6 +66,15 @@ public class EnemyTracking : MonoBehaviour
             {
                 return;
             }
+        }
+        if (this.stunned == true)
+        {
+            StunWaitingTime();
+            if (this.cooldown == true)
+            {
+                CooldownWaitingTime();
+            }
+            return;
         }
         if (Vector2.Distance(this.transform.position, this.player.transform.position) > this.minDistance)
         {
@@ -81,9 +104,35 @@ public class EnemyTracking : MonoBehaviour
         // Debug.Log("The enemy has attacked you");
         if (this.cooldown == false)
         {
+            this.animator.SetBool("Attacking", true);
             this.player.DamageToPlayer();
             this.cooldown = true;
         }
+    }
+
+    private void AttackAnimation()
+    {
+        this.attackAnimationCounter += Time.fixedDeltaTime;
+        if (this.attackAnimationCounter >= this.attackAnimationTime)
+        {
+            this.attackAnimationCounter = 0f;
+            this.animator.SetBool("Attacking", false);
+        }
+    }
+
+    /**
+     * Method for inflicting damage to the enemy
+     */
+    public void DamageToEnemy()
+    {
+        if (this.stunned)
+        {
+            return;
+        }
+        this.stunned = true;
+        this.animator.SetBool("Stunned", this.stunned);
+        this.elapsedStunCounter = 0f;
+        this.audioSourceDamage.PlayOneShot(this.audioClipDamage);
     }
 
     // Indicates if the stun timeout has passed
@@ -94,6 +143,18 @@ public class EnemyTracking : MonoBehaviour
         {
             this.elapsedCooldownCounter = 0f;
             this.cooldown = false;
+        }
+    }
+
+    // Indicates if the stun timeout has passed
+    private void StunWaitingTime()
+    {
+        this.elapsedStunCounter += Time.fixedDeltaTime;
+        if (this.elapsedStunCounter >= this.stunTime)
+        {
+            this.elapsedStunCounter = 0f;
+            this.stunned = false;
+            this.animator.SetBool("Stunned", this.stunned);
         }
     }
 
